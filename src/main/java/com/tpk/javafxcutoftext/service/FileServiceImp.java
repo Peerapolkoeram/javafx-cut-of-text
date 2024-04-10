@@ -11,7 +11,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @RequiredArgsConstructor
 public class FileServiceImp {
@@ -32,18 +31,18 @@ public class FileServiceImp {
     }
 
    public List<Object> getDataInExcel(ExcelRecordModel excelRecordModel) {
-       Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
-       Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
        List<Object> listObject = new ArrayList<>();
        List<Object> addRows = new ArrayList<>();
+       Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
+       Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
        for (Row row : sheet) {
-           if (row.getRowNum() >= 10) {
+           if (row.getRowNum() >= 0) {
                for (Cell cell : row) {
                    for (int j : excelRecordModel.selectColumn()) {
                        listObject.add(findDataCell(cell,j));
                    }
                }
-               addRows.add(listObject);
+               addRows.add(new ArrayList<>().add(listObject));
                listObject.clear();
            }
        }
