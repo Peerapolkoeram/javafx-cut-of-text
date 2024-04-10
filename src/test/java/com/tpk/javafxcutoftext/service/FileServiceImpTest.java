@@ -1,6 +1,5 @@
 package com.tpk.javafxcutoftext.service;
 
-import com.sun.jdi.IntegerType;
 import com.tpk.javafxcutoftext.model.ExcelRecordModel;
 import com.tpk.javafxcutoftext.model.SheetRecordModel;
 import com.tpk.javafxcutoftext.utils.FilesUtils;
@@ -22,13 +21,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @ExtendWith(MockitoExtension.class)
 class FileServiceImpTest {
@@ -103,6 +98,7 @@ class FileServiceImpTest {
     @Test
     @SneakyThrows
     public void verifyDataInExcel() {
+        //prepare data
         List<Integer> selectRows = List.of(0, 1);
         String pathFile = path.resolve(fileName).toString();
         FileInputStream inputStream = new FileInputStream(pathFile);
@@ -113,10 +109,14 @@ class FileServiceImpTest {
                                 .build())
                 .pathFile(pathFile)
                 .selectColumn(selectRows)
+                .startRow(0)
                 .build();
+        // mock method
         Mockito.when(filesUtils.fileInputStream(Mockito.any())).thenReturn(inputStream);
         Mockito.when(filesUtils.workbook(Mockito.any())).thenReturn(new XSSFWorkbook(inputStream));
+        //call service
         List<Object> result = fileServiceImp.getDataInExcel(excelRecordModel);
+        //verify
         result.forEach(System.out::println);
     }
 

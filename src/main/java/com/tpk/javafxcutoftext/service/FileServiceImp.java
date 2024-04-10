@@ -31,19 +31,18 @@ public class FileServiceImp {
     }
 
    public List<Object> getDataInExcel(ExcelRecordModel excelRecordModel) {
-       List<Object> listObject = new ArrayList<>();
        List<Object> addRows = new ArrayList<>();
        Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
        Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
        for (Row row : sheet) {
-           if (row.getRowNum() >= 0) {
+           List<Object> listObject = new ArrayList<>();
+           if (row.getRowNum() >= excelRecordModel.startRow()) {
                for (Cell cell : row) {
                    for (int j : excelRecordModel.selectColumn()) {
                        listObject.add(findDataCell(cell,j));
                    }
                }
-               addRows.add(new ArrayList<>().add(listObject));
-               listObject.clear();
+               addRows.add(listObject);
            }
        }
        return addRows;

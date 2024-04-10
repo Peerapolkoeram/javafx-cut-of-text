@@ -8,6 +8,7 @@ import java.util.List;
 public record ExcelRecordModel(
         SheetRecordModel sheetRecordModel,
         String pathFile,
-        List<Integer> selectColumn
+        List<Integer> selectColumn,
+        Integer startRow
 ) {
 }
