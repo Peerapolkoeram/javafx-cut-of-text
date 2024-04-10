@@ -1,6 +1,6 @@
 package com.tpk.javafxcutoftext.service;
 
-import com.tpk.javafxcutoftext.model.SheetExcelModel;
+import com.tpk.javafxcutoftext.model.SheetRecordModel;
 import com.tpk.javafxcutoftext.utils.FilesUtils;
 import lombok.SneakyThrows;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
@@ -33,15 +34,16 @@ class FileServiceImpTest {
     @TempDir
     private static Path path;
 
-    static String fileName = "data.xlsx";
+    private static final String fileName = "data.xlsx";
 
     @BeforeAll
     @SneakyThrows
     public static void createExcelFile() {
         path = Files.createTempDirectory("TempDir");
+        File file = path.resolve(fileName).toFile();
         try (Workbook workbook = new XSSFWorkbook();) {
             Sheet sheet = workbook.createSheet("sheetNameOne");
-            FileOutputStream outputStream = new FileOutputStream(path.resolve(fileName).toFile());
+            FileOutputStream outputStream = new FileOutputStream(file);
             workbook.write(outputStream);
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
@@ -57,11 +59,10 @@ class FileServiceImpTest {
         Workbook sheets = new XSSFWorkbook(fileInputStream);
 
         //call service
-        List<SheetExcelModel> result = fileServiceImp.getSheetExcel(sheets);
+        List<SheetRecordModel> result = fileServiceImp.getSheetExcel(sheets);
 
         //check
         Assertions.assertNotNull(result);
-
     }
 
     @SneakyThrows
