@@ -5,6 +5,9 @@ module com.tpk.javafxcutoftext {
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
     requires org.kordamp.bootstrapfx.core;
+    requires static lombok;
+    requires org.apache.poi.poi;
+    requires org.apache.poi.ooxml;
 
     opens com.tpk.javafxcutoftext to javafx.fxml;
     exports com.tpk.javafxcutoftext;
