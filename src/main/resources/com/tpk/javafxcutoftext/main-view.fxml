@@ -12,17 +12,33 @@
             <content>
               <AnchorPane fx:id="btnChooseFileExcel" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="bntChooseFileExcel" layoutX="37.0" layoutY="66.0" mnemonicParsing="false" onAction="#onclickChooseExcelFile" prefHeight="45.0" prefWidth="101.0" text="Choose file">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                        <Label layoutX="38.0" layoutY="29.0" text="Excel File">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="txtExcelFileName" layoutX="148.0" layoutY="80.0" text="Label" />
+                        <VBox layoutX="21.0" layoutY="21.0" prefHeight="754.0" prefWidth="361.0">
+                           <children>
+                              <Label text="Excel File">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="bntChooseFileExcel" mnemonicParsing="false" onAction="#onclickChooseExcelFile" prefHeight="45.0" prefWidth="101.0" text="Choose file">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Label fx:id="txtExcelFileName" layoutX="115.0" layoutY="15.0" prefHeight="20.0" prefWidth="205.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
             </content>
