@@ -12,11 +12,11 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 10, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 1600, 800);
         stage.setTitle("Cut OF Text");
         stage.setScene(scene);
-        stage.setResizable(true);
-        stage.setFullScreen(true);
+        stage.setResizable(false);
+        stage.setFullScreen(false);
         stage.show();
     }
 
