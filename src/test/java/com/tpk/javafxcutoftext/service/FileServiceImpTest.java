@@ -16,6 +16,7 @@ import org.junit.jupiter.api.io.TempDir;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.File;
@@ -28,6 +29,7 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 class FileServiceImpTest {
 
+    @Spy
     @InjectMocks
     private FileServiceImp fileServiceImp;
 

@@ -8,6 +8,7 @@ module com.tpk.javafxcutoftext {
     requires static lombok;
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
+    requires java.desktop;
 
     opens com.tpk.javafxcutoftext to javafx.fxml;
     exports com.tpk.javafxcutoftext;
