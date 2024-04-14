@@ -17,22 +17,32 @@ public class FileServiceImp implements FileService{
 
     private final FilesUtils filesUtils;
 
-    public List<SheetRecordModel> getSheetExcel(Workbook sheets) {
-        List<SheetRecordModel> listSheetName = new ArrayList<>();
+    public List<Object> getSheetExcel(Workbook sheets) {
+        List<Object> objects = new ArrayList<>();
         for (int i = 0; i < sheets.getNumberOfSheets(); i++) {
+            List<SheetRecordModel> listSheetName = new ArrayList<>();
             int sheetNumber = sheets.getNumberOfSheets();
             String sheetName = sheets.getSheetName(i);
             listSheetName.add(SheetRecordModel.builder()
                     .sheetName(sheetName)
                     .sheetNumber(sheetNumber)
                     .build());
+            objects.add(listSheetName);
         }
-        return listSheetName;
+        return objects;
     }
 
-   public List<Object> getDataInExcel(ExcelRecordModel excelRecordModel) {
+    public List<Object> getData(ExcelRecordModel excelRecordModel) {
+        Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
+        if (excelRecordModel.condition().equals("SHEET_NUMBER")) {
+            return getSheetExcel(workbook);
+        } else {
+            return getDataInExcel(excelRecordModel,workbook);
+        }
+    }
+
+   public List<Object> getDataInExcel(ExcelRecordModel excelRecordModel, Workbook workbook) {
        List<Object> addRows = new ArrayList<>();
-       Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
        Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
        for (Row row : sheet) {
            List<Object> listObject = new ArrayList<>();

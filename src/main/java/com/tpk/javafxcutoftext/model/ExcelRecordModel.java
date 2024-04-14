@@ -7,6 +7,7 @@ import java.util.List;
 @Builder
 public record ExcelRecordModel(
         SheetRecordModel sheetRecordModel,
+        String condition,
         String pathFile,
         List<Integer> selectColumn,
         Integer startRow
