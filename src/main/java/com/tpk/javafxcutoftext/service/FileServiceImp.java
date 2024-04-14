@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class FileServiceImp {
+public class FileServiceImp implements FileService{
 
     private final FilesUtils filesUtils;
 
@@ -48,7 +48,7 @@ public class FileServiceImp {
        return addRows;
    }
 
-    public Object findDataCell(Cell cell, int column) {
+    private Object findDataCell(Cell cell, int column) {
         switch (cell.getCellType()) {
             case NUMERIC -> {return cell.getNumericCellValue();}
             case FORMULA -> {return cell.getCellFormula();}
