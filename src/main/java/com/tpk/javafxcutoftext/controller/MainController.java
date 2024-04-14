@@ -47,4 +47,15 @@ public class MainController {
         List<Object> result = fileService.getDataInExcel(excelRecordModel);
         result.forEach(System.out::println);
     }
+
+    public ExcelRecordModel excelRecordModel(String condition) {
+        if (condition.equals("SHEET_NUMBER")) {
+            return  ExcelRecordModel.builder()
+                    .condition(condition)
+                    .build();
+        } else {
+            return ExcelRecordModel.builder()
+                    .build();
+        }
+    }
 }

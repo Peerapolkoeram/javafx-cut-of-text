@@ -32,16 +32,16 @@ public class FileServiceImp implements FileService{
         return objects;
     }
 
-    public List<Object> getData(ExcelRecordModel excelRecordModel) {
+    public List<Object> getDataInExcel(ExcelRecordModel excelRecordModel) {
         Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
         if (excelRecordModel.condition().equals("SHEET_NUMBER")) {
             return getSheetExcel(workbook);
         } else {
-            return getDataInExcel(excelRecordModel,workbook);
+            return readDataInExcel(excelRecordModel,workbook);
         }
     }
 
-   public List<Object> getDataInExcel(ExcelRecordModel excelRecordModel, Workbook workbook) {
+   public List<Object> readDataInExcel(ExcelRecordModel excelRecordModel, Workbook workbook) {
        List<Object> addRows = new ArrayList<>();
        Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
        for (Row row : sheet) {
