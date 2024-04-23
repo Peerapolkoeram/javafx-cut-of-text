@@ -92,7 +92,7 @@ class FileServiceImpTest {
         FileInputStream fileInputStream = getInputFile(pathFile);
         Workbook sheets = new XSSFWorkbook(fileInputStream);
         //call service
-        List<SheetRecordModel> result = fileServiceImp.getSheetExcel(sheets);
+        List<Object> result = fileServiceImp.getSheetExcel(sheets);
         //check
         Assertions.assertNotNull(result);
     }
@@ -111,14 +111,16 @@ class FileServiceImpTest {
                                 .build())
                 .pathFile(pathFile)
                 .selectColumn(selectRows)
+                .condition("GET_DATA")
                 .startRow(0)
                 .build();
         // mock method
-        Mockito.when(filesUtils.fileInputStream(Mockito.any())).thenReturn(inputStream);
-        Mockito.when(filesUtils.workbook(Mockito.any())).thenReturn(new XSSFWorkbook(inputStream));
+//        Mockito.when(filesUtils.fileInputStream(Mockito.any())).thenReturn(inputStream);
+//        Mockito.when(filesUtils.workbook(Mockito.any())).thenReturn(new XSSFWorkbook(inputStream));
         //call service
         List<Object> result = fileServiceImp.getDataInExcel(excelRecordModel);
         //verify
+        Assertions.assertNotNull(result);
         result.forEach(System.out::println);
     }
 

@@ -5,17 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tpk.javafxcutoftext.controller.MainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tpk.javafxcutoftext.controller.MainController">
    <children>
-      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="800.0" minWidth="1600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane minHeight="800.0" minWidth="1600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Check Format Excel">
             <content>
               <AnchorPane fx:id="btnChooseFileExcel" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <HBox layoutX="-1.0" layoutY="1.0" prefHeight="772.0" prefWidth="1600.0">
+                        <HBox layoutX="-1.0" layoutY="1.0">
                            <children>
-                              <VBox prefHeight="816.0" prefWidth="374.0">
+                              <VBox prefHeight="816.0" prefWidth="255.0">
                                  <children>
                                     <Label text="Excel File">
                                        <font>
@@ -26,12 +26,12 @@
                                        <children>
                                           <AnchorPane HBox.hgrow="ALWAYS">
                                              <children>
-                                                <Button fx:id="bntChooseFileExcel" layoutY="26.0" mnemonicParsing="false" onAction="#onclickChooseExcelFile" prefHeight="36.0" prefWidth="101.0" text="Choose file">
+                                                <Button fx:id="bntChooseFileExcel" layoutY="26.0" mnemonicParsing="false" onAction="#onclickChooseExcelFile" prefHeight="36.0" prefWidth="95.0" text="Choose file">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <TextField fx:id="inpExcelFile" disable="true" layoutX="115.0" layoutY="30.0" prefHeight="25.0" prefWidth="238.0">
+                                                <TextField fx:id="inpExcelFile" disable="true" layoutX="115.0" layoutY="30.0" prefHeight="30.0" prefWidth="174.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -46,7 +46,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </VBox>
-                              <TableView prefHeight="772.0" prefWidth="1237.0">
+                              <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1286.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />

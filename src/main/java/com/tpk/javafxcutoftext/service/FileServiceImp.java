@@ -12,10 +12,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 public class FileServiceImp implements FileService{
 
-    private final FilesUtils filesUtils;
+    private final FilesUtils filesUtils = new FilesUtils();
+
+    public FileServiceImp() {
+
+    }
 
     public List<Object> getSheetExcel(Workbook sheets) {
         List<Object> objects = new ArrayList<>();
