@@ -92,7 +92,7 @@ class FileServiceImpTest {
         FileInputStream fileInputStream = getInputFile(pathFile);
         Workbook sheets = new XSSFWorkbook(fileInputStream);
         //call service
-        List<Object> result = fileServiceImp.getSheetExcel(sheets);
+        List<List<SheetRecordModel>> result = fileServiceImp.getSheetExcel(sheets);
         //check
         Assertions.assertNotNull(result);
     }
@@ -118,7 +118,7 @@ class FileServiceImpTest {
 //        Mockito.when(filesUtils.fileInputStream(Mockito.any())).thenReturn(inputStream);
 //        Mockito.when(filesUtils.workbook(Mockito.any())).thenReturn(new XSSFWorkbook(inputStream));
         //call service
-        List<Object> result = fileServiceImp.getDataInExcel(excelRecordModel);
+        List<List<SheetRecordModel>> result = fileServiceImp.getDataInExcel(excelRecordModel);
         //verify
         Assertions.assertNotNull(result);
         result.forEach(System.out::println);

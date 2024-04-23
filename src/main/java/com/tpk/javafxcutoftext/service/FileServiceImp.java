@@ -3,7 +3,6 @@ package com.tpk.javafxcutoftext.service;
 import com.tpk.javafxcutoftext.model.ExcelRecordModel;
 import com.tpk.javafxcutoftext.model.SheetRecordModel;
 import com.tpk.javafxcutoftext.utils.FilesUtils;
-import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -20,28 +19,23 @@ public class FileServiceImp implements FileService{
 
     }
 
-    public List<Object> getSheetExcel(Workbook sheets) {
-        List<Object> objects = new ArrayList<>();
+    public List<List<SheetRecordModel>> getSheetExcel(Workbook sheets) {
+        List<List<SheetRecordModel>> result = new ArrayList<>();
         for (int i = 0; i < sheets.getNumberOfSheets(); i++) {
             List<SheetRecordModel> listSheetName = new ArrayList<>();
-            int sheetNumber = sheets.getNumberOfSheets();
             String sheetName = sheets.getSheetName(i);
             listSheetName.add(SheetRecordModel.builder()
                     .sheetName(sheetName)
-                    .sheetNumber(sheetNumber)
+                    .sheetNumber(i)
                     .build());
-            objects.add(listSheetName);
+            result.add(listSheetName);
         }
-        return objects;
+        return result;
     }
 
-    public List<Object> getDataInExcel(ExcelRecordModel excelRecordModel) {
+    public List<List<SheetRecordModel>> getDataInExcel(ExcelRecordModel excelRecordModel) {
         Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
-        if (excelRecordModel.condition().equals("SHEET_NUMBER")) {
-            return getSheetExcel(workbook);
-        } else {
-            return readDataInExcel(excelRecordModel,workbook);
-        }
+        return getSheetExcel(workbook);
     }
 
    public List<Object> readDataInExcel(ExcelRecordModel excelRecordModel, Workbook workbook) {
