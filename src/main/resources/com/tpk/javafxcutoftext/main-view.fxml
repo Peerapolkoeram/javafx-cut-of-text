@@ -15,7 +15,7 @@
                      <children>
                         <HBox layoutX="-1.0" layoutY="1.0">
                            <children>
-                              <VBox fx:id="bntSheet" prefHeight="816.0" prefWidth="255.0">
+                              <VBox prefHeight="816.0" prefWidth="255.0">
                                  <children>
                                     <Label text="Excel File">
                                        <font>
@@ -31,21 +31,19 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <TextField fx:id="inpExcelFile" disable="true" layoutX="115.0" layoutY="30.0" prefHeight="30.0" prefWidth="174.0">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </TextField>
+                                                <TextField fx:id="inpExcelFile" disable="true" layoutX="115.0" layoutY="30.0" prefHeight="30.0" prefWidth="174.0" />
                                              </children>
                                           </AnchorPane>
                                        </children>
                                     </HBox>
                                     <Separator prefHeight="0.0" prefWidth="361.0" />
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" text="Button" />
-                                       </children>
-                                    </HBox>
+                                    <HBox fx:id="bntSheet" prefHeight="100.0" prefWidth="200.0">
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding></HBox>
                                  </children>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

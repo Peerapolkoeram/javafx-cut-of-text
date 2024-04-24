@@ -19,7 +19,11 @@ public class FileServiceImp implements FileService{
 
     }
 
-    public List<List<SheetRecordModel>> getSheetExcel(Workbook sheets) {
+    public Workbook workbookFile(String pathFile) {
+        return filesUtils.workbook(filesUtils.fileInputStream(pathFile));
+    }
+
+    public List<List<SheetRecordModel>> readSheetName(Workbook sheets) {
         List<List<SheetRecordModel>> result = new ArrayList<>();
         for (int i = 0; i < sheets.getNumberOfSheets(); i++) {
             List<SheetRecordModel> listSheetName = new ArrayList<>();
@@ -33,11 +37,6 @@ public class FileServiceImp implements FileService{
         return result;
     }
 
-    public List<List<SheetRecordModel>> getDataInExcel(ExcelRecordModel excelRecordModel) {
-        Workbook workbook = filesUtils.workbook(filesUtils.fileInputStream(excelRecordModel.pathFile()));
-        return getSheetExcel(workbook);
-    }
-
    public List<Object> readDataInExcel(ExcelRecordModel excelRecordModel, Workbook workbook) {
        List<Object> addRows = new ArrayList<>();
        Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
@@ -46,7 +45,7 @@ public class FileServiceImp implements FileService{
            if (row.getRowNum() >= excelRecordModel.startRow()) {
                for (Cell cell : row) {
                    for (int j : excelRecordModel.selectColumn()) {
-                       listObject.add(findDataCell(cell,j));
+                       listObject.add(findDataCell(cell));
                    }
                }
                addRows.add(listObject);

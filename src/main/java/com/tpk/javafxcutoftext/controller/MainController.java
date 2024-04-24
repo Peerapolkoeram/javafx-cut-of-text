@@ -6,9 +6,11 @@ import com.tpk.javafxcutoftext.service.FileService;
 import com.tpk.javafxcutoftext.service.FileServiceImp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -17,7 +19,6 @@ import java.util.List;
 
 public class MainController {
 
-    private final List<String> condition = List.of("GET_SHEET","GET_DATA");
     private final FileService fileService = new FileServiceImp();
 
     private final FileChooser fileChooser = new FileChooser();
@@ -29,7 +30,7 @@ public class MainController {
     private TextField inpExcelFile;
 
     @FXML
-    private VBox bntSheet;
+    private HBox bntSheet;
 
     @FXML
     protected void onclickChooseExcelFile() {
@@ -39,18 +40,19 @@ public class MainController {
             inpExcelFile.setText(file.getAbsolutePath());
         } catch (Exception ignored) {}
 
-        List<List<SheetRecordModel>> result = null;
-        for (String e : condition) {
-            if (e.equals("GET_SHEET")) {
-                result = fileService.getDataInExcel(ExcelRecordModel.builder()
-                        .pathFile(file.getAbsolutePath()).build());
-            }
+        List<List<SheetRecordModel>> result = fileService.readSheetName(fileService.workbookFile(file.getAbsolutePath()));
+
+        if (bntSheet.getChildren() != null) {
+            bntSheet.getChildren().clear();
         }
+
         result.forEach( e -> {
             e.forEach( a -> {
                 Button button = new Button(a.sheetName());
                 button.setOnAction(this::handleButtonClick);
                 bntSheet.getChildren().add(button);
+                bntSheet.setSpacing(10);
+                bntSheet.setPadding(new Insets(10));
             });
         });
     }
@@ -58,5 +60,6 @@ public class MainController {
     private void handleButtonClick(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         String buttonText = clickedButton.getText();
+        System.out.println(buttonText);
     }
 }

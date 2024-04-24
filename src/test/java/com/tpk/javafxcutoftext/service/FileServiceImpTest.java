@@ -15,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -92,7 +91,7 @@ class FileServiceImpTest {
         FileInputStream fileInputStream = getInputFile(pathFile);
         Workbook sheets = new XSSFWorkbook(fileInputStream);
         //call service
-        List<List<SheetRecordModel>> result = fileServiceImp.getSheetExcel(sheets);
+        List<List<SheetRecordModel>> result = fileServiceImp.readSheetName(sheets);
         //check
         Assertions.assertNotNull(result);
     }
@@ -118,7 +117,7 @@ class FileServiceImpTest {
 //        Mockito.when(filesUtils.fileInputStream(Mockito.any())).thenReturn(inputStream);
 //        Mockito.when(filesUtils.workbook(Mockito.any())).thenReturn(new XSSFWorkbook(inputStream));
         //call service
-        List<List<SheetRecordModel>> result = fileServiceImp.getDataInExcel(excelRecordModel);
+        List<List<SheetRecordModel>> result = fileServiceImp.readSheetName(fileServiceImp.workbookFile(excelRecordModel.pathFile()));
         //verify
         Assertions.assertNotNull(result);
         result.forEach(System.out::println);
