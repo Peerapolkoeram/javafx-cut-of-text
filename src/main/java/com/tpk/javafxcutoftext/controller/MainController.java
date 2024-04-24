@@ -4,17 +4,15 @@ import com.tpk.javafxcutoftext.model.ExcelRecordModel;
 import com.tpk.javafxcutoftext.model.SheetRecordModel;
 import com.tpk.javafxcutoftext.service.FileService;
 import com.tpk.javafxcutoftext.service.FileServiceImp;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
@@ -31,6 +29,9 @@ public class MainController {
     private TextField inpExcelFile;
 
     @FXML
+    private VBox bntSheet;
+
+    @FXML
     protected void onclickChooseExcelFile() {
         fileChooser.setTitle("Choose Excel File");
         File file = fileChooser.showOpenDialog(null);
@@ -45,13 +46,17 @@ public class MainController {
                         .pathFile(file.getAbsolutePath()).build());
             }
         }
-        VBox root = new VBox();
         result.forEach( e -> {
             e.forEach( a -> {
-                Label label = new Label(a.sheetName());
-                root.getChildren().add(label);
+                Button button = new Button(a.sheetName());
+                button.setOnAction(this::handleButtonClick);
+                bntSheet.getChildren().add(button);
             });
         });
+    }
 
+    private void handleButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String buttonText = clickedButton.getText();
     }
 }

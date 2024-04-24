@@ -55,7 +55,7 @@ public class FileServiceImp implements FileService{
        return addRows;
    }
 
-    private Object findDataCell(Cell cell, int column) {
+    private Object findDataCell(Cell cell) {
         switch (cell.getCellType()) {
             case NUMERIC -> {return cell.getNumericCellValue();}
             case FORMULA -> {return cell.getCellFormula();}
