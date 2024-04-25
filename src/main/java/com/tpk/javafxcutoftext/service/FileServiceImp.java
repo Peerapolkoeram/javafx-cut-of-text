@@ -9,9 +9,11 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class FileServiceImp implements FileService{
+public class FileServiceImp implements FileService {
 
     private final FilesUtils filesUtils = new FilesUtils();
 
@@ -37,30 +39,53 @@ public class FileServiceImp implements FileService{
         return result;
     }
 
-   public List<Object> readDataInExcel(ExcelRecordModel excelRecordModel, Workbook workbook) {
-       List<Object> addRows = new ArrayList<>();
-       Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
-       for (Row row : sheet) {
-           List<Object> listObject = new ArrayList<>();
-           if (row.getRowNum() >= excelRecordModel.startRow()) {
-               for (Cell cell : row) {
-                   for (int j : excelRecordModel.selectColumn()) {
-                       listObject.add(findDataCell(cell));
-                   }
-               }
-               addRows.add(listObject);
-           }
-       }
-       return addRows;
-   }
+    public List<Object> readDataList(ExcelRecordModel excelRecordModel, Workbook workbook) {
+        List<Object> addRows = new ArrayList<>();
+        Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
+        for (Row row : sheet) {
+            List<Object> listObject = new ArrayList<>();
+            if (row.getRowNum() >= excelRecordModel.startRow()) {
+                for (Cell cell : row) {
+                    for (int j : excelRecordModel.selectColumn()) {
+                        listObject.add(findDataCell(cell));
+                    }
+                }
+                addRows.add(listObject);
+            }
+        }
+        return addRows;
+    }
+
+    public Map<Integer, List<Object>> readDataMap(ExcelRecordModel excelRecordModel) {
+        Workbook workbook = workbookFile(excelRecordModel.pathFile());
+        Sheet sheet = workbook.getSheetAt(excelRecordModel.sheetRecordModel().sheetNumber());
+        Map<Integer, List<Object>> data = new HashMap<>();
+        int i = 0;
+        for (Row row : sheet) {
+            data.put(i, new ArrayList<>());
+            for (Cell cell : row) {
+                data.get(i).add(findDataCell(cell));
+            }
+            i++;
+        }
+        return null;
+    }
 
     private Object findDataCell(Cell cell) {
         switch (cell.getCellType()) {
-            case NUMERIC -> {return cell.getNumericCellValue();}
-            case FORMULA -> {return cell.getCellFormula();}
-            case BOOLEAN -> {return cell.getBooleanCellValue();}
-            default -> {return cell.getStringCellValue();}
+            case NUMERIC -> {
+                return cell.getNumericCellValue();
+            }
+            case FORMULA -> {
+                return cell.getCellFormula();
+            }
+            case BOOLEAN -> {
+                return cell.getBooleanCellValue();
+            }
+            default -> {
+                return cell.getStringCellValue();
+            }
         }
-   }
+    }
 
 }
