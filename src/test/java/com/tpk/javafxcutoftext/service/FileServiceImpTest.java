@@ -102,7 +102,7 @@ class FileServiceImpTest {
         //prepare data
         List<Integer> selectRows = List.of(0, 1);
         String pathFile = path.resolve(fileName).toString();
-        FileInputStream inputStream = new FileInputStream(pathFile);
+//        FileInputStream inputStream = new FileInputStream(pathFile);
         ExcelRecordModel excelRecordModel = ExcelRecordModel.builder()
                 .sheetRecordModel(SheetRecordModel.builder()
                                 .sheetNumber(0)
